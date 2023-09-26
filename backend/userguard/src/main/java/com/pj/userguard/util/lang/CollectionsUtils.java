@@ -1,14 +1,16 @@
 package com.pj.userguard.util.lang;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class CollectionsUtils {
 
     private CollectionsUtils() {}
 
     public static <T> Set<T> newHashSet(T element) {
-        return new HashSet<>(Arrays.asList(element));
+        return new HashSet<>(Collections.singletonList(element));
+    }
+
+    public static <T> Collection<T> unmodifiableCollection(T... elements) {
+       return Collections.unmodifiableCollection(Arrays.asList(elements));
     }
 }

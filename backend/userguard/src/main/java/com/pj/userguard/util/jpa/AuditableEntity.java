@@ -8,7 +8,7 @@ import lombok.Setter;
 import java.util.Objects;
 
 @Getter
-@EqualsAndHashCode(of ="id")
+@EqualsAndHashCode(of ="id", callSuper = false)
 @MappedSuperclass
 public class AuditableEntity extends Auditable {
 

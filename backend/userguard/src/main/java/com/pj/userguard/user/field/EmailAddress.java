@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 @Embeddable
 public class EmailAddress {
 
-    private static final Pattern EMAIL_PATTERN = Pattern.compile("^[A-Za-z0-9+_.-]+@(.+){3,255}$");
+    private static final Pattern EMAIL_PATTERN = Pattern.compile("^[A-Za-z0-9+_.-]+@(.+){3,128}$");
 
     @Column(name = "email", nullable = false, unique = true)
     private String email;
