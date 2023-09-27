@@ -32,5 +32,4 @@ public class Username {
         AssertString.notFollowsPattern(username, USERNAME_PATTERN, "username is invalid");
         return new Username(username);
     }
-
 }

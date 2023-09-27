@@ -1,14 +1,15 @@
 package com.pj.userguard.user;
 
 import com.pj.userguard.user.command.CreateUserCommand;
+import com.pj.userguard.user.entity.Role;
 import com.pj.userguard.user.field.EmailAddress;
 import com.pj.userguard.user.field.Password;
 import com.pj.userguard.user.field.Username;
 import com.pj.userguard.util.jpa.AuditableEntity;
-import jakarta.persistence.Embedded;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
+
+import java.util.Set;
 
 @Getter
 @Entity
@@ -24,19 +25,23 @@ public class User extends AuditableEntity {
     @Embedded
     private EmailAddress emailAddress;
 
-    protected User() {
-        this.username = null;
-        this.password = null;
-        this.emailAddress = null;
-    }
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    Set<Role> roles;
 
-    private User(Username username, Password password, EmailAddress emailAddress) {
+    protected User() {}
+
+    private User(Username username, Password password, EmailAddress emailAddress, Set<Role> roles) {
         this.username = username;
         this.password = password;
         this.emailAddress = emailAddress;
+        this.roles = Set.copyOf(roles);
     }
 
     private static User createUser(CreateUserCommand command) {
-        return new User(command.username(), command.password(), command.emailAddress());
+        return new User(command.username(), command.password(), command.emailAddress(), command.roles());
     }
 }
