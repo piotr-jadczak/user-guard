@@ -1,7 +1,6 @@
-package com.pj.userguard.user;
+package com.pj.userguard.user.entity;
 
 import com.pj.userguard.user.command.CreateUserCommand;
-import com.pj.userguard.user.entity.Role;
 import com.pj.userguard.user.field.EmailAddress;
 import com.pj.userguard.user.field.Password;
 import com.pj.userguard.user.field.Username;
@@ -9,6 +8,7 @@ import com.pj.userguard.util.jpa.AuditableEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -32,7 +32,9 @@ public class User extends AuditableEntity {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     Set<Role> roles;
 
-    protected User() {}
+    protected User() {
+        this.roles = new HashSet<>();
+    }
 
     private User(Username username, Password password, EmailAddress emailAddress, Set<Role> roles) {
         this.username = username;
@@ -41,7 +43,7 @@ public class User extends AuditableEntity {
         this.roles = Set.copyOf(roles);
     }
 
-    private static User createUser(CreateUserCommand command) {
+    public static User createUser(CreateUserCommand command) {
         return new User(command.username(), command.password(), command.emailAddress(), command.roles());
     }
 }

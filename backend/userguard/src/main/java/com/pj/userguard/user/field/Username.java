@@ -3,11 +3,13 @@ package com.pj.userguard.user.field;
 import com.pj.userguard.util.lang.AssertString;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 import java.util.regex.Pattern;
 
 @Getter
+@EqualsAndHashCode(of = "username")
 @Embeddable
 public class Username {
 
@@ -18,7 +20,7 @@ public class Username {
     private static final Pattern USERNAME_PATTERN = Pattern.compile("^(?=.*[a-zA-Z])[A-Za-z0-9_-]{4,32}$");
 
     @Column(name = "username", nullable = false, unique = true)
-    private String username;
+    private final String username;
 
     protected Username() {
         this.username = null;

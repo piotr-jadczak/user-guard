@@ -5,5 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @JsonFormat(shape = JsonFormat.Shape.STRING)
 public enum RoleName {
     USER,
-    ADMIN
+    ADMIN;
+
+    public static RoleName[] SUPER_USER_ROLES = RoleName.values();
 }

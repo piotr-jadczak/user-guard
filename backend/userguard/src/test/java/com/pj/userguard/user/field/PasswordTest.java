@@ -14,13 +14,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.stream.Stream;
 
+import static com.pj.userguard.user.UserTestUtils.ENCODED_PASSWORD;
+import static com.pj.userguard.user.UserTestUtils.PASSWORD;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class PasswordTest {
-
-    private static final String HASHED_PASSWORD = "hashedPassword";
 
     @Mock
     private PasswordEncoder passwordEncoderMock;
@@ -43,10 +43,8 @@ class PasswordTest {
     @Test
     void createEncodedPassword_throwsException_passwordEncoderIsNull() {
 
-        var validPassword = "whiteDog123!";
-
         Assertions.assertThrowsExactly(NullPointerException.class,
-                () -> Password.createEncodedPassword(validPassword, null),
+                () -> Password.createEncodedPassword(PASSWORD, null),
                 "password encoder is null");
     }
 
@@ -59,10 +57,10 @@ class PasswordTest {
     @MethodSource("validPasswords")
     void createEncodedPassword_validPasswords(String password) {
 
-        when(passwordEncoderMock.encode(password)).thenReturn(HASHED_PASSWORD);
+        when(passwordEncoderMock.encode(password)).thenReturn(ENCODED_PASSWORD);
 
         var passwordObject = Password.createEncodedPassword(password, passwordEncoderMock);
 
-        assertThat(passwordObject.getPassword()).isEqualTo(HASHED_PASSWORD);
+        assertThat(passwordObject.getPassword()).isEqualTo(ENCODED_PASSWORD);
     }
 }
