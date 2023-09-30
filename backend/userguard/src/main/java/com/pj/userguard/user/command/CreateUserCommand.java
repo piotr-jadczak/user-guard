@@ -19,7 +19,7 @@ public record CreateUserCommand(
         return new CreateUserCommand(
                 Username.of(dto.username()),
                 Password.createEncodedPassword(dto.password(), encoder),
-                EmailAddress.of(dto.emailAddress()),
+                EmailAddress.of(dto.email()),
                 Set.of(roles));
     }
 }
