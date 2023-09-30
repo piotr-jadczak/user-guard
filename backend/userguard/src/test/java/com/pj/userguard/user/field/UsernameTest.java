@@ -1,8 +1,8 @@
 package com.pj.userguard.user.field;
 
 import com.pj.userguard.util.ArgumentsUtils;
+import com.pj.userguard.util.AssertionsUtils;
 import com.pj.userguard.util.lang.CollectionsUtils;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -23,7 +23,7 @@ class UsernameTest {
     @MethodSource("invalidUsernames")
     void of_throwsException(String username) {
 
-        Assertions.assertThrowsExactly(IllegalArgumentException.class,
+        AssertionsUtils.assertThrowsWithMessage(IllegalArgumentException.class,
                 () -> Username.of(username),
                 "username is invalid");
     }

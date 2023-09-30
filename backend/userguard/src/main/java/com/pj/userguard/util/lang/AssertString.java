@@ -41,17 +41,17 @@ public class AssertString {
 
     public static void notFollowsPattern(String s, Pattern pattern, String message) {
         Objects.requireNonNull(pattern, ERROR.PATTERN_IS_NULL.message);
-        notNull(s);
+        notNull(s, message);
         if (pattern.asPredicate().negate().test(s)) {
             throw new IllegalArgumentException(message);
         }
     }
 
     private enum ERROR {
-        NULL_STRING("String is null"),
+        NULL_STRING("string is null"),
         EMPTY_STRING("string is empty"),
-        BLANK_STRING("String is blank"),
-        PATTERN_IS_NULL("Pattern is null");
+        BLANK_STRING("string is blank"),
+        PATTERN_IS_NULL("pattern is null");
 
         private final String message;
 

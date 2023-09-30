@@ -1,6 +1,7 @@
 package com.pj.userguard.user.entity;
 
 import com.pj.userguard.user.command.CreateUserCommand;
+import com.pj.userguard.user.field.AccountState;
 import com.pj.userguard.user.field.EmailAddress;
 import com.pj.userguard.user.field.Password;
 import com.pj.userguard.user.field.Username;
@@ -25,7 +26,10 @@ public class User extends AuditableEntity {
     @Embedded
     private EmailAddress emailAddress;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @Embedded
+    private AccountState accountState;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(
             name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -41,9 +45,20 @@ public class User extends AuditableEntity {
         this.password = password;
         this.emailAddress = emailAddress;
         this.roles = Set.copyOf(roles);
+        this.accountState = AccountState.active();
     }
 
     public static User createUser(CreateUserCommand command) {
         return new User(command.username(), command.password(), command.emailAddress(), command.roles());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return entityEquals(this, User.class);
+    }
+
+    @Override
+    public int hashCode() {
+        return entityHashcode();
     }
 }

@@ -1,19 +1,47 @@
 package com.pj.userguard.util.jpa;
 
-import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
+import jakarta.persistence.Column;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
-import lombok.Setter;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.util.Objects;
+import java.time.LocalDateTime;
 
 @Getter
-@EqualsAndHashCode(of ="id", callSuper = false)
+@EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
-public class AuditableEntity extends Auditable {
+public class AuditableEntity extends BasicEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+    @CreatedBy
+    @Column(name = "created_by")
+    private String createdBy;
+
+    @CreatedDate
+    @Column(name = "created_date", nullable = false, updatable = false)
+    private LocalDateTime createdDate;
+
+    @LastModifiedBy
+    @Column(name = "last_modified_by")
+    private String lastModifiedBy;
+
+    @LastModifiedDate
+    @Column(name = "last_modified_date")
+    private LocalDateTime lastModifiedDate;
+
+    protected AuditableEntity() {}
+
+    @Override
+    public boolean equals(Object o) {
+        return entityEquals(this, AuditableEntity.class);
+    }
+
+    @Override
+    public int hashCode() {
+        return entityHashcode();
+    }
 }

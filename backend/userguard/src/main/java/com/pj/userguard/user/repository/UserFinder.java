@@ -11,9 +11,12 @@ import java.util.Optional;
 
 public interface UserFinder extends Finder<User, Long> {
 
-    @Query(value = "SELECT u FROM User u WHERE u.username = :username")
+    @Query(value = "SELECT u.username FROM User u WHERE u.username = :username")
     Optional<Username> findByUsername(@Param("username") Username username);
 
-    @Query(value = "SELECT u FROM User u WHERE u.emailAddress = :emailAddress")
+    @Query(value = "SELECT u.emailAddress FROM User u WHERE u.emailAddress = :emailAddress")
     Optional<EmailAddress> findByEmailAddress(@Param("emailAddress") EmailAddress emailAddress);
+
+    @Query(value = "SELECT u FROM User u WHERE u.username.username = :username")
+    Optional<User> findByUsername(@Param("username") String username);
 }

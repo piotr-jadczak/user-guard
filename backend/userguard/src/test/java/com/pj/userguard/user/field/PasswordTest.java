@@ -1,8 +1,8 @@
 package com.pj.userguard.user.field;
 
 import com.pj.userguard.util.ArgumentsUtils;
+import com.pj.userguard.util.AssertionsUtils;
 import com.pj.userguard.util.lang.CollectionsUtils;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -35,7 +35,7 @@ class PasswordTest {
     @MethodSource("invalidPasswords")
     void createEncodedPassword_throwsException_invalidPasswords(String password) {
 
-        Assertions.assertThrowsExactly(IllegalArgumentException.class,
+        AssertionsUtils.assertThrowsWithMessage(IllegalArgumentException.class,
                 () -> Password.createEncodedPassword(password, passwordEncoderMock),
                 "password is invalid");
     }
@@ -43,7 +43,7 @@ class PasswordTest {
     @Test
     void createEncodedPassword_throwsException_passwordEncoderIsNull() {
 
-        Assertions.assertThrowsExactly(NullPointerException.class,
+        AssertionsUtils.assertThrowsWithMessage(NullPointerException.class,
                 () -> Password.createEncodedPassword(PASSWORD, null),
                 "password encoder is null");
     }

@@ -8,8 +8,8 @@ import com.pj.userguard.user.exception.UserWithUsernameAlreadyExists;
 import com.pj.userguard.user.repository.RoleRepository;
 import com.pj.userguard.user.repository.UserFinder;
 import com.pj.userguard.user.repository.UserRepository;
+import com.pj.userguard.util.AssertionsUtils;
 import com.pj.userguard.util.DataUtils;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -45,7 +45,7 @@ class UserCreationServiceTest {
     void createUser_throwsException_roleUserNotFound() {
         when(roleRepositoryMock.getByRoleName(RoleName.USER)).thenReturn(Optional.empty());
 
-        Assertions.assertThrowsExactly(RoleNotFoundException.class,
+        AssertionsUtils.assertThrowsWithMessage(RoleNotFoundException.class,
                 () -> userCreationService.createUser(defaultCreateUserDTO()),
                 String.format("Role: %s not found", RoleName.USER));
     }
@@ -56,7 +56,7 @@ class UserCreationServiceTest {
         defaultMockPasswordEncoder();
         when(userFinderMock.findByUsername(USERNAME_OBJECT)).thenReturn(Optional.of(USERNAME_OBJECT));
 
-        Assertions.assertThrowsExactly(UserWithUsernameAlreadyExists.class,
+        AssertionsUtils.assertThrowsWithMessage(UserWithUsernameAlreadyExists.class,
                 () -> userCreationService.createUser(defaultCreateUserDTO()),
                 String.format("User with username: %s already exists", USERNAME));
     }
@@ -68,9 +68,9 @@ class UserCreationServiceTest {
         defaultMockUsernameValidation();
         when(userFinderMock.findByEmailAddress(EMAIL_ADDRESS)).thenReturn(Optional.of(EMAIL_ADDRESS));
 
-        Assertions.assertThrowsExactly(UserWithEmailAddressAlreadyExists.class,
+        AssertionsUtils.assertThrowsWithMessage(UserWithEmailAddressAlreadyExists.class,
                 () -> userCreationService.createUser(defaultCreateUserDTO()),
-                String.format("User with username: %s already exists", EMAIL));
+                String.format("User with email: %s already exists", EMAIL));
     }
 
     @Test

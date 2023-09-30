@@ -1,14 +1,15 @@
 package com.pj.userguard.user.field;
 
 import com.pj.userguard.util.ArgumentsUtils;
+import com.pj.userguard.util.AssertionsUtils;
 import com.pj.userguard.util.lang.CollectionsUtils;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import static org.assertj.core.api.Assertions.*;
 
 import java.util.stream.Stream;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class EmailAddressTest {
 
@@ -22,7 +23,7 @@ class EmailAddressTest {
     @MethodSource("invalidEmails")
     void of_throwsException(String email) {
 
-        Assertions.assertThrowsExactly(IllegalArgumentException.class,
+        AssertionsUtils.assertThrowsWithMessage(IllegalArgumentException.class,
                 () -> EmailAddress.of(email),
                 "email address is invalid");
     }
