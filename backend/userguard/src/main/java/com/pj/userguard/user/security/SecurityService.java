@@ -19,6 +19,6 @@ public class SecurityService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userFinder.findByUsername(username)
                 .map(SecurityUser::of)
-                .orElseThrow(() -> new UsernameNotFoundException(String.format("User with username: %s not found", username)));
+                .orElseThrow(() -> new UsernameNotFoundException(String.format("User with user: %s not found", username)));
     }
 }

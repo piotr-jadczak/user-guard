@@ -29,6 +29,6 @@ class SecurityServiceTest {
 
         AssertionsUtils.assertThrowsWithMessage(UsernameNotFoundException.class,
                 () -> securityService.loadUserByUsername(USERNAME),
-                String.format("User with username: %s not found", USERNAME));
+                String.format("User with user: %s not found", USERNAME));
     }
 }

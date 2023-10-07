@@ -58,7 +58,7 @@ class UserCreationServiceTest {
 
         AssertionsUtils.assertThrowsWithMessage(UserWithUsernameAlreadyExists.class,
                 () -> userCreationService.createUser(defaultCreateUserDTO()),
-                String.format("User with username: %s already exists", USERNAME));
+                String.format("User with user: %s already exists", USERNAME));
     }
 
     @Test

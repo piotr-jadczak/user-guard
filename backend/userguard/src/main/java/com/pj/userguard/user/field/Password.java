@@ -21,7 +21,7 @@ public class Password {
     private static final Pattern PASSWORD_PATTERN = Pattern.compile("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,64}$");
 
     @Column(name = "password", nullable = false)
-    private String password;
+    private final String password;
 
     protected Password() {
         this.password = null;

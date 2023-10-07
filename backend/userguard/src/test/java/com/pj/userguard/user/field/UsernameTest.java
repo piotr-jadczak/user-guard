@@ -19,13 +19,13 @@ class UsernameTest {
         return ArgumentsUtils.createArgumentsWithValues(invalidUsernames);
     }
 
-    @ParameterizedTest(name = "{index} => username=''{0}''")
+    @ParameterizedTest(name = "{index} => user=''{0}''")
     @MethodSource("invalidUsernames")
     void of_throwsException(String username) {
 
         AssertionsUtils.assertThrowsWithMessage(IllegalArgumentException.class,
                 () -> Username.of(username),
-                "username is invalid");
+                "user is invalid");
     }
 
     private static Stream<Arguments> validUsernames() {
@@ -34,7 +34,7 @@ class UsernameTest {
         return ArgumentsUtils.createArgumentsWithValues(validUsernames);
     }
 
-    @ParameterizedTest(name = "{index} => username=''{0}''")
+    @ParameterizedTest(name = "{index} => user=''{0}''")
     @MethodSource("validUsernames")
     void of_validUsername(String username) {
 

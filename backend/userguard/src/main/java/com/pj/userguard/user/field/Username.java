@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 public class Username {
 
     /**
-     * username can contain only letters (bot uppercase and lowercase), numbers, underscores, hyphens
+     * user can contain only letters (bot uppercase and lowercase), numbers, underscores, hyphens
      * must be between 4 and 32 characters long
      */
     private static final Pattern USERNAME_PATTERN = Pattern.compile("^(?=.*[a-zA-Z])[A-Za-z0-9_-]{4,32}$");
@@ -31,7 +31,7 @@ public class Username {
     }
 
     public static Username of(String username) {
-        AssertString.notFollowsPattern(username, USERNAME_PATTERN, "username is invalid");
+        AssertString.notFollowsPattern(username, USERNAME_PATTERN, "user is invalid");
         return new Username(username);
     }
 }
