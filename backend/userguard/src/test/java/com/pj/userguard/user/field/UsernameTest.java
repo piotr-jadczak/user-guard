@@ -25,7 +25,7 @@ class UsernameTest {
 
         AssertionsUtils.assertThrowsWithMessage(IllegalArgumentException.class,
                 () -> Username.of(username),
-                "user is invalid");
+                "username is invalid");
     }
 
     private static Stream<Arguments> validUsernames() {
