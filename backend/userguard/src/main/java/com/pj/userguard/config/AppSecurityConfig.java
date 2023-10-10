@@ -16,7 +16,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @AllArgsConstructor
 @EnableMethodSecurity
 @Configuration
-public class SecurityConfig {
+public class AppSecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -24,7 +24,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    @Order(1)
+    @Order(2)
     public SecurityFilterChain appSecurityFilterChain(HttpSecurity http) throws Exception {
         // endpoints security
         http.authorizeHttpRequests(c -> c.anyRequest().authenticated());

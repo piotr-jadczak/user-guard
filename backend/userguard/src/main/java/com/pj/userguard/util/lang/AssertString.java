@@ -39,7 +39,7 @@ public class AssertString {
         notBlank(s, ERROR.BLANK_STRING.message);
     }
 
-    public static void notFollowsPattern(String s, Pattern pattern, String message) {
+    public static void followsPattern(String s, Pattern pattern, String message) {
         Objects.requireNonNull(pattern, ERROR.PATTERN_IS_NULL.message);
         notNull(s, message);
         if (pattern.asPredicate().negate().test(s)) {

@@ -33,7 +33,7 @@ public class Password {
 
     public static Password createEncodedPassword(String password, PasswordEncoder encoder) {
         Objects.requireNonNull(encoder, "password encoder is null");
-        AssertString.notFollowsPattern(password, PASSWORD_PATTERN, "password is invalid");
+        AssertString.followsPattern(password, PASSWORD_PATTERN, "password is invalid");
         return new Password(encoder.encode(password));
     }
 }

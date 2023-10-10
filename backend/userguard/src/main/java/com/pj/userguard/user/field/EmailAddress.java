@@ -27,7 +27,7 @@ public class EmailAddress {
     }
 
     public static EmailAddress of(String email) {
-        AssertString.notFollowsPattern(email, EMAIL_PATTERN, "email address is invalid");
+        AssertString.followsPattern(email, EMAIL_PATTERN, "email address is invalid");
         return new EmailAddress(email);
     }
 }
