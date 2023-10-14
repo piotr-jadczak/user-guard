@@ -36,11 +36,15 @@ public class Role extends BasicEntity {
 
         Role role = (Role) o;
 
-        return new EqualsBuilder().append(name, role.name).isEquals();
+        return new EqualsBuilder()
+                .append(name, role.name)
+                .isEquals();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder(17, 37).append(name).toHashCode();
+        return new HashCodeBuilder(17, 37)
+                .append(name)
+                .toHashCode();
     }
 }

@@ -31,10 +31,10 @@ public class User extends AuditableEntity {
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(
-            name = "user_role",
+            name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    Set<Role> roles;
+    private final Set<Role> roles;
 
     protected User() {
         this.roles = new HashSet<>();

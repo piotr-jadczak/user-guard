@@ -19,7 +19,7 @@ class UsernameTest {
         return ArgumentsUtils.createArgumentsWithValues(invalidUsernames);
     }
 
-    @ParameterizedTest(name = "{index} => user=''{0}''")
+    @ParameterizedTest(name = "{index} => username=''{0}''")
     @MethodSource("invalidUsernames")
     void of_throwsException(String username) {
 
@@ -34,7 +34,7 @@ class UsernameTest {
         return ArgumentsUtils.createArgumentsWithValues(validUsernames);
     }
 
-    @ParameterizedTest(name = "{index} => user=''{0}''")
+    @ParameterizedTest(name = "{index} => username=''{0}''")
     @MethodSource("validUsernames")
     void of_validUsername(String username) {
 

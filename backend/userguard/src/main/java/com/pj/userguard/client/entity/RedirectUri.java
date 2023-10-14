@@ -1,12 +1,10 @@
 package com.pj.userguard.client.entity;
 
 import com.pj.userguard.client.field.RedirectUriType;
-import com.pj.userguard.client.field.Uri;
 import com.pj.userguard.util.jpa.BasicEntity;
+import com.pj.userguard.util.jpa.field.Uri;
 import jakarta.persistence.*;
 import lombok.Getter;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 @Getter
 @Entity
@@ -35,25 +33,14 @@ public class RedirectUri extends BasicEntity {
         return new RedirectUri(uri, RedirectUriType.POST_LOGOUT);
     }
 
+
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-
-        if (o == null || getClass() != o.getClass()) return false;
-
-        RedirectUri that = (RedirectUri) o;
-
-        return new EqualsBuilder()
-                .append(uri, that.uri)
-                .append(type, that.type)
-                .isEquals();
+        return entityEquals(this, RedirectUri.class);
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder(17, 37)
-                .append(uri)
-                .append(type)
-                .toHashCode();
+        return entityHashcode();
     }
 }

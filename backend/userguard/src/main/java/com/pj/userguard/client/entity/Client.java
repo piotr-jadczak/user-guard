@@ -3,6 +3,7 @@ package com.pj.userguard.client.entity;
 import com.pj.userguard.client.field.ClientId;
 import com.pj.userguard.client.field.ClientName;
 import com.pj.userguard.client.field.ClientSecret;
+import com.pj.userguard.client.field.UniqueId;
 import com.pj.userguard.util.jpa.AuditableEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -15,6 +16,9 @@ import java.util.Set;
 public class Client extends AuditableEntity {
 
     @Embedded
+    private UniqueId uniqueId;
+
+    @Embedded
     private ClientId clientId;
 
     @Embedded
@@ -23,19 +27,23 @@ public class Client extends AuditableEntity {
     @Embedded
     private ClientName clientName;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinTable(
-            name = "client_redirect_uri",
-            joinColumns = @JoinColumn(name = "client_id"),
-            inverseJoinColumns = @JoinColumn(name = "redirect_uri_id"))
-    Set<RedirectUri> redirectUris;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "client_id")
+    private Set<RedirectUri> redirectUris;
+
+    @OneToOne(orphanRemoval = true, cascade = CascadeType.ALL)
+    @JoinTable(name = "client_id")
+    private ClientConfiguration configuration;
 
     protected Client() {}
 
-    private Client(ClientId clientId, ClientSecret clientSecret, ClientName clientName, Set<RedirectUri> redirectUris) {
+    private Client(UniqueId uniqueId, ClientId clientId, ClientSecret clientSecret, ClientName clientName,
+                   Set<RedirectUri> redirectUris, ClientConfiguration configuration) {
+        this.uniqueId = uniqueId;
         this.clientId = clientId;
         this.clientSecret = clientSecret;
         this.clientName = clientName;
-        this.redirectUris = redirectUris;
+        this.redirectUris = Set.copyOf(redirectUris);
+        this.configuration = configuration;
     }
 }
