@@ -20,7 +20,7 @@ public class ClientScope extends BasicEntity {
         this.scope = scope;
     }
 
-    public ClientScope of(String scopeValue) {
+    public static ClientScope of(String scopeValue) {
         return new ClientScope(Scope.fromString(scopeValue));
     }
 

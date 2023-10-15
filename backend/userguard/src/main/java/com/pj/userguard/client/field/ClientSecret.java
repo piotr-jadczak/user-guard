@@ -8,7 +8,9 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Objects;
 import java.util.UUID;
 import java.util.regex.Pattern;
@@ -50,5 +52,10 @@ public class ClientSecret {
         Objects.requireNonNull(encoder, "password encoder is null");
         AssertString.followsPattern(clientSecret, CLIENT_SECRET_PATTERN, "client secret is invalid");
         return new ClientSecret(encoder.encode(clientSecret));
+    }
+
+    public Instant getExpiresAt() {
+        Objects.requireNonNull(expiresAt, "expires at is null");
+        return expiresAt.toInstant(ZoneOffset.UTC);
     }
 }
