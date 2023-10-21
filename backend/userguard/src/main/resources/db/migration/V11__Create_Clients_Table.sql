@@ -10,7 +10,7 @@ CREATE TABLE clients (
    client_secret VARCHAR NOT NULL,
    client_secret_expires_at TIMESTAMP NOT NULL,
    client_name VARCHAR NOT NULL,
-   configuration_id BIGINT UNIQUE NOT NULL,
+   configuration_id BIGINT UNIQUE NOT NULL
 );
 
 ALTER TABLE clients

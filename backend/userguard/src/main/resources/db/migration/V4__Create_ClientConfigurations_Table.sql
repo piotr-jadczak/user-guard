@@ -14,5 +14,5 @@ CREATE TABLE client_configurations (
    device_code_seconds_to_live BIGINT,
    reuse_refresh_tokens BOOLEAN,
    refresh_token_seconds_to_live BIGINT,
-   token_signature_algorithm VARCHAR(255),
+   token_signature_algorithm VARCHAR(255)
 );
