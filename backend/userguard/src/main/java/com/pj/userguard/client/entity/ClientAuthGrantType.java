@@ -13,7 +13,7 @@ import org.springframework.security.oauth2.core.AuthorizationGrantType;
 @Table(name = "client_auth_grant_types")
 public class ClientAuthGrantType extends BasicEntity {
 
-    @Column(name = "auth_grant_type")
+    @Column(name = "auth_grant_type", nullable = false)
     @Enumerated(EnumType.STRING)
     private AuthGrantType authGrantType;
 

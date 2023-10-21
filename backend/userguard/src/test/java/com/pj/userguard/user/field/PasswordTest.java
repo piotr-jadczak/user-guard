@@ -2,7 +2,7 @@ package com.pj.userguard.user.field;
 
 import com.pj.userguard.util.ArgumentsUtils;
 import com.pj.userguard.util.AssertionsUtils;
-import com.pj.userguard.util.lang.CollectionsUtils;
+import com.pj.userguard.util.lang.CollectionUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -26,7 +26,7 @@ class PasswordTest {
     private PasswordEncoder passwordEncoderMock;
 
     private static Stream<Arguments> invalidPasswords() {
-        var invalidPasswords = CollectionsUtils.unmodifiableCollection(null, "", " ", "abcd", "ab",
+        var invalidPasswords = CollectionUtils.unmodifiableCollection(null, "", " ", "abcd", "ab",
                 "aaaaa23213", "doggy2134", "dogggg123?", "DOGGY1234", "aaa23124!!!");
         return ArgumentsUtils.createArgumentsWithValues(invalidPasswords);
     }
@@ -49,7 +49,7 @@ class PasswordTest {
     }
 
     private static Stream<Arguments> validPasswords() {
-        var validPasswords = CollectionsUtils.unmodifiableCollection("whiteDog123!", "123abc!!AD", "1234!Aa??");
+        var validPasswords = CollectionUtils.unmodifiableCollection("whiteDog123!", "123abc!!AD", "1234!Aa??");
         return ArgumentsUtils.createArgumentsWithValues(validPasswords);
     }
 

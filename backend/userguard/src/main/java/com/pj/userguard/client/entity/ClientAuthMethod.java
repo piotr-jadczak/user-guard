@@ -13,7 +13,7 @@ import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 @Table(name = "client_auth_methods")
 public class ClientAuthMethod extends BasicEntity {
 
-    @Column(name = "method")
+    @Column(name = "method", nullable = false)
     @Enumerated(EnumType.STRING)
     private AuthMethod method;
 

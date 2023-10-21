@@ -1,0 +1,2 @@
+INSERT INTO client_auth_grant_types (method)
+VALUES ('AUTHORIZATION_CODE'), ('REFRESH_TOKEN'), ('CLIENT_CREDENTIALS'), ('JWT_BEARER'), ('DEVICE_CODE');

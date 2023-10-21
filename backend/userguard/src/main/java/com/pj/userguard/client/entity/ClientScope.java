@@ -10,7 +10,7 @@ import lombok.Getter;
 @Table(name = "client_scopes")
 public class ClientScope extends BasicEntity {
 
-    @Column(name = "scope")
+    @Column(name = "scope", nullable = false)
     @Enumerated(EnumType.STRING)
     private Scope scope;
 

@@ -5,6 +5,7 @@ import com.pj.userguard.client.entity.ClientAuthMethod;
 import com.pj.userguard.client.entity.ClientScope;
 import com.pj.userguard.client.field.ClientAuthSettings;
 import com.pj.userguard.client.field.TokenAuthSettings;
+import com.pj.userguard.util.lang.AssertCollection;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
@@ -29,14 +30,17 @@ public record CreateClientConfigurationCommand(
     }
 
     private static Set<ClientAuthMethod> mapClientAuthMethods(Set<ClientAuthenticationMethod> methods) {
+        AssertCollection.notEmpty(methods, "no client authentication methods");
         return methods.stream().map(ClientAuthMethod::of).collect(Collectors.toUnmodifiableSet());
     }
 
     private static Set<ClientAuthGrantType> mapAuthGranTypes(Set<AuthorizationGrantType> types) {
+        AssertCollection.notEmpty(types, "no authorization grant types");
         return types.stream().map(ClientAuthGrantType::of).collect(Collectors.toUnmodifiableSet());
     }
 
     private static Set<ClientScope> mapScopes(Set<String> scopes) {
+        AssertCollection.notEmpty(scopes, "no scopes");
         return scopes.stream().map(ClientScope::of).collect(Collectors.toUnmodifiableSet());
     }
 }

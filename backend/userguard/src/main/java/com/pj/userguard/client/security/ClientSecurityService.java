@@ -22,8 +22,8 @@ public class ClientSecurityService implements RegisteredClientRepository {
     private final PasswordEncoder passwordEncoder;
     private final ClientFinder clientFinder;
 
-    public ClientSecurityService(ClientRepository clientRepository, PasswordEncoder passwordEncoder,
-                                 ClientFinder clientFinder) {
+    ClientSecurityService(ClientRepository clientRepository, PasswordEncoder passwordEncoder,
+                          ClientFinder clientFinder) {
         this.clientRepository = clientRepository;
         this.passwordEncoder = passwordEncoder;
         this.clientFinder = clientFinder;

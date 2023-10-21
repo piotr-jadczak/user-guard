@@ -2,9 +2,9 @@ package com.pj.userguard.util.lang;
 
 import java.util.*;
 
-public class CollectionsUtils {
+public class CollectionUtils {
 
-    private CollectionsUtils() {}
+    private CollectionUtils() {}
 
     public static <T> Set<T> newHashSet(T element) {
         return new HashSet<>(Collections.singletonList(element));

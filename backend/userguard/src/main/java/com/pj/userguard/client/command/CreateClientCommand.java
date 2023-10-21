@@ -7,6 +7,7 @@ import com.pj.userguard.client.field.ClientName;
 import com.pj.userguard.client.field.ClientSecret;
 import com.pj.userguard.client.field.UniqueId;
 import com.pj.userguard.util.jpa.field.Uri;
+import com.pj.userguard.util.lang.AssertCollection;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 
@@ -35,6 +36,8 @@ public record CreateClientCommand(
     }
 
     private static Set<RedirectUri> mapToRedirectUris(Set<String> redirectUris, Set<String> postLogoutRedirectUris) {
+        AssertCollection.notEmpty(redirectUris, "no redirect uris");
+
         return Stream.of(redirectUris.stream().map(Uri::of).map(RedirectUri::postLoginUri).toList(),
                 postLogoutRedirectUris.stream().map(Uri::of).map(RedirectUri::postLogoutUri).toList())
                 .flatMap(Collection::stream)

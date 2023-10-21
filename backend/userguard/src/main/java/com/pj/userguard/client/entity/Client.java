@@ -32,8 +32,8 @@ public class Client extends AuditableEntity {
     @JoinTable(name = "client_id")
     private final Set<RedirectUri> redirectUris;
 
-    @OneToOne(orphanRemoval = true, cascade = CascadeType.ALL)
-    @JoinTable(name = "client_id")
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "configuration_id")
     private ClientConfiguration configuration;
 
     protected Client() {

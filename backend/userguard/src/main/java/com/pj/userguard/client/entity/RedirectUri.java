@@ -14,7 +14,7 @@ public class RedirectUri extends BasicEntity {
     @Embedded
     private Uri uri;
 
-    @Column(name = "type")
+    @Column(name = "type", nullable = false)
     @Enumerated(EnumType.STRING)
     private RedirectUriType type;
 

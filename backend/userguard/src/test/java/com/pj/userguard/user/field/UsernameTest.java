@@ -2,7 +2,7 @@ package com.pj.userguard.user.field;
 
 import com.pj.userguard.util.ArgumentsUtils;
 import com.pj.userguard.util.AssertionsUtils;
-import com.pj.userguard.util.lang.CollectionsUtils;
+import com.pj.userguard.util.lang.CollectionUtils;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class UsernameTest {
 
     private static Stream<Arguments> invalidUsernames() {
-        var invalidUsernames = CollectionsUtils.unmodifiableCollection(null, "", " ", "da", "danny%%",
+        var invalidUsernames = CollectionUtils.unmodifiableCollection(null, "", " ", "da", "danny%%",
                 "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "1234", "ABBA!!", "john kowalski");
         return ArgumentsUtils.createArgumentsWithValues(invalidUsernames);
     }
@@ -29,7 +29,7 @@ class UsernameTest {
     }
 
     private static Stream<Arguments> validUsernames() {
-        var validUsernames = CollectionsUtils.unmodifiableCollection("john_kowalski", "johnny123",
+        var validUsernames = CollectionUtils.unmodifiableCollection("john_kowalski", "johnny123",
                 "john-kowalski", "bzzz");
         return ArgumentsUtils.createArgumentsWithValues(validUsernames);
     }
