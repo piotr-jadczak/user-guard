@@ -6,8 +6,8 @@ import com.pj.userguard.user.dto.CreatedUserDTO;
 import com.pj.userguard.user.entity.RoleName;
 import com.pj.userguard.user.entity.User;
 import com.pj.userguard.user.exception.RoleNotFoundException;
-import com.pj.userguard.user.exception.UserWithEmailAddressAlreadyExists;
-import com.pj.userguard.user.exception.UserWithUsernameAlreadyExists;
+import com.pj.userguard.user.exception.UserWithEmailAddressAlreadyExistsException;
+import com.pj.userguard.user.exception.UserWithUsernameAlreadyExistsException;
 import com.pj.userguard.user.repository.RoleRepository;
 import com.pj.userguard.user.repository.UserFinder;
 import com.pj.userguard.user.repository.UserRepository;
@@ -42,11 +42,11 @@ public class UserCreationService {
 
     private void validateUsernameUnique(CreateUserCommand command) {
         userFinder.findByUsername(command.username())
-                .ifPresent(username -> {throw new UserWithUsernameAlreadyExists(username);});
+                .ifPresent(username -> {throw new UserWithUsernameAlreadyExistsException(username);});
     }
 
     private void validateEmailAddressUnique(CreateUserCommand command) {
         userFinder.findByEmailAddress(command.emailAddress())
-                .ifPresent(emailAddress -> {throw new UserWithEmailAddressAlreadyExists(emailAddress);});
+                .ifPresent(emailAddress -> {throw new UserWithEmailAddressAlreadyExistsException(emailAddress);});
     }
 }

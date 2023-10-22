@@ -3,8 +3,8 @@ package com.pj.userguard.user.service;
 import com.pj.userguard.user.entity.RoleName;
 import com.pj.userguard.user.entity.User;
 import com.pj.userguard.user.exception.RoleNotFoundException;
-import com.pj.userguard.user.exception.UserWithEmailAddressAlreadyExists;
-import com.pj.userguard.user.exception.UserWithUsernameAlreadyExists;
+import com.pj.userguard.user.exception.UserWithEmailAddressAlreadyExistsException;
+import com.pj.userguard.user.exception.UserWithUsernameAlreadyExistsException;
 import com.pj.userguard.user.repository.RoleRepository;
 import com.pj.userguard.user.repository.UserFinder;
 import com.pj.userguard.user.repository.UserRepository;
@@ -56,7 +56,7 @@ class UserCreationServiceTest {
         defaultMockPasswordEncoder();
         when(userFinderMock.findByUsername(USERNAME_OBJECT)).thenReturn(Optional.of(USERNAME_OBJECT));
 
-        AssertionsUtils.assertThrowsWithMessage(UserWithUsernameAlreadyExists.class,
+        AssertionsUtils.assertThrowsWithMessage(UserWithUsernameAlreadyExistsException.class,
                 () -> userCreationService.createUser(defaultCreateUserDTO()),
                 String.format("User with user: %s already exists", USERNAME));
     }
@@ -68,7 +68,7 @@ class UserCreationServiceTest {
         defaultMockUsernameValidation();
         when(userFinderMock.findByEmailAddress(EMAIL_ADDRESS)).thenReturn(Optional.of(EMAIL_ADDRESS));
 
-        AssertionsUtils.assertThrowsWithMessage(UserWithEmailAddressAlreadyExists.class,
+        AssertionsUtils.assertThrowsWithMessage(UserWithEmailAddressAlreadyExistsException.class,
                 () -> userCreationService.createUser(defaultCreateUserDTO()),
                 String.format("User with email: %s already exists", EMAIL));
     }

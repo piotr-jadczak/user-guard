@@ -1,5 +1,6 @@
 CREATE TABLE client_configurations (
    id BIGSERIAL PRIMARY KEY,
+   is_default BOOLEAN NOT NULL,
    created_by VARCHAR(255),
    created_date TIMESTAMP NOT NULL,
    last_modified_by VARCHAR(255),

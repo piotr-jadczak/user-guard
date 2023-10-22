@@ -1,5 +1,6 @@
 package com.pj.userguard.client.command;
 
+import com.pj.userguard.client.api.CreateDefaultClientDTO;
 import com.pj.userguard.client.entity.ClientConfiguration;
 import com.pj.userguard.client.entity.RedirectUri;
 import com.pj.userguard.client.field.ClientId;
@@ -32,6 +33,17 @@ public record CreateClientCommand(
                 ClientSecret.fromString(client.getClientSecret(), encoder),
                 ClientName.of(client.getClientName()),
                 mapToRedirectUris(client.getRedirectUris(), client.getPostLogoutRedirectUris()),
+                configuration);
+    }
+
+    public static CreateClientCommand of(CreateDefaultClientDTO dto, PasswordEncoder encoder,
+                                         ClientConfiguration configuration) {
+        return new CreateClientCommand(
+                UniqueId.of(dto.id()),
+                ClientId.from(dto.clientId()),
+                ClientSecret.fromString(dto.clientSecret(), encoder),
+                ClientName.of(dto.clientName()),
+                mapToRedirectUris(dto.postLoginRedirectUris(), dto.postLogoutRedirectUris()),
                 configuration);
     }
 

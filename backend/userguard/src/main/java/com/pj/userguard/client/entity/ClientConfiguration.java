@@ -20,6 +20,9 @@ import java.util.stream.Collectors;
 @Table(name = "client_configurations")
 public class ClientConfiguration extends AuditableEntity {
 
+    @Column(name = "is_default")
+    private final boolean isDefault;
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(
             name = "client_configurations_auth_methods",
@@ -51,6 +54,7 @@ public class ClientConfiguration extends AuditableEntity {
         this.authMethods = new HashSet<>();
         this.authGrantTypes = new HashSet<>();
         this.scopes = new HashSet<>();
+        this.isDefault = false;
     }
 
     private ClientConfiguration(Set<ClientAuthMethod> authMethods, Set<ClientAuthGrantType> authGrantTypes,
@@ -61,6 +65,7 @@ public class ClientConfiguration extends AuditableEntity {
         this.scopes = Set.copyOf(scopes);
         this.clientAuthSettings = clientAuthSettings;
         this.tokenAuthSettings = tokenAuthSettings;
+        this.isDefault = false;
     }
 
     public static ClientConfiguration create(CreateClientConfigurationCommand command) {
