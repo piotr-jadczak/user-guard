@@ -1,4 +1,4 @@
-package com.pj.userguard.client.api;
+package com.pj.userguard.client.dto;
 
 import java.util.Set;
 

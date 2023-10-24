@@ -1,9 +1,9 @@
 package com.pj.userguard.client.service;
 
-import com.pj.userguard.client.api.CreateDefaultClientDTO;
-import com.pj.userguard.client.api.CreatedClientDTO;
 import com.pj.userguard.client.command.CreateClientCommand;
 import com.pj.userguard.client.command.CreateClientConfigurationCommand;
+import com.pj.userguard.client.dto.CreateDefaultClientDTO;
+import com.pj.userguard.client.dto.CreatedClientDTO;
 import com.pj.userguard.client.entity.Client;
 import com.pj.userguard.client.entity.ClientConfiguration;
 import com.pj.userguard.client.exception.ClientWithClientIdAlreadyExistsException;

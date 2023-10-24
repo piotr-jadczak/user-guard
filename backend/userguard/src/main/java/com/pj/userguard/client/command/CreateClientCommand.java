@@ -1,6 +1,6 @@
 package com.pj.userguard.client.command;
 
-import com.pj.userguard.client.api.CreateDefaultClientDTO;
+import com.pj.userguard.client.dto.CreateDefaultClientDTO;
 import com.pj.userguard.client.entity.ClientConfiguration;
 import com.pj.userguard.client.entity.RedirectUri;
 import com.pj.userguard.client.field.ClientId;
