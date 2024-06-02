@@ -15,8 +15,8 @@ public class GlobalExceptionHandler {
 
     private final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
-    @ExceptionHandler(value = {IllegalArgumentException.class, IllegalStateException.class})
-    public ResponseEntity<ExceptionResponse> handleException(RuntimeException exception, HttpServletRequest webRequest) {
+    @ExceptionHandler(value = {IllegalArgumentException.class})
+    public ResponseEntity<ExceptionResponse> handleException(IllegalArgumentException exception, HttpServletRequest webRequest) {
 
         var principal = webRequest.getUserPrincipal();
 

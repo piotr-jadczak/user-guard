@@ -4,17 +4,17 @@ import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.CorsConfigurer;
+import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-@AllArgsConstructor
 @EnableMethodSecurity
+@AllArgsConstructor
 @Configuration
 public class AppSecurityConfig {
 
@@ -27,19 +27,18 @@ public class AppSecurityConfig {
     @Order(2)
     public SecurityFilterChain appSecurityFilterChain(HttpSecurity http) throws Exception {
         // endpoints security
-        http.authorizeHttpRequests(c -> c.anyRequest().authenticated());
+        http.authorizeHttpRequests(c -> c.anyRequest().permitAll());
 
         // cors
-        http.cors(AbstractHttpConfigurer::disable);
+        http.cors(CorsConfigurer::disable);
 
         // csrf
-        http.csrf(AbstractHttpConfigurer::disable);
+        http.csrf(CsrfConfigurer::disable);
 
         // session management
         http.sessionManagement(c -> c.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         // authentication type
-        http.httpBasic(Customizer.withDefaults());
 
         return http.build();
     }
